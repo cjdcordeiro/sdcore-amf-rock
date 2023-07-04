@@ -10,7 +10,11 @@ jobs:
   build:
     uses: ./.github/workflows/build.yaml
 
+  scan:
+    needs: build
+    uses: ./.github/workflows/scan.yaml
+
   publish:
     if: github.ref_name == 'main'
-    needs: build
+    needs: scan
     uses: ./.github/workflows/publish.yaml
